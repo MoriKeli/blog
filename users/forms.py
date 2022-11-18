@@ -50,3 +50,11 @@ class UploadBlogForm(forms.ModelForm):
     class Meta:
         model = Posts
         fields = ['title', 'content']
+
+class EditBlogsForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(attrs={'type': 'text'}), help_text='Title of your blog should contain atleast 60 characters')
+    content = forms.CharField(widget=forms.Textarea(attrs={'type': 'text'}))
+
+    class Meta:
+        model = Posts
+        fields = ['title', 'content']

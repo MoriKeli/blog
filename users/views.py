@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView, LogoutView
-from .forms import SignupForm, EditProfileForm, UpdateProfileForm, UploadBlogForm
+from .forms import SignupForm, EditProfileForm, UpdateProfileForm, UploadBlogForm, EditBlogsForm
 from .models import Posts
 
 
@@ -48,21 +48,37 @@ def userprofile_view(request):
     return render(request, 'users/profile.html', context)
 
 
+@login_required(login_url='login')
+@user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False)
 def homepage_view(request):
     blogs = Posts.objects.all()
+    edit_blog = EditBlogsForm(instance=request.user.profile)
 
     if request.method == 'POST':
         get_response = request.POST['response']
-
-        get_BlogObj = Posts.objects.get(id=get_response, blogger=request.user.profile)
-        get_BlogObj.delete()
+        edit_blog = EditBlogsForm(request.POST, instance=request.user.profile)
         
-        messages.error(request, 'Blog has been deleted successfully!')
+        if edit_blog.is_valid():
+            form = edit_blog.save()
+            messages.info(request, f'You have edited blog {form.title}')
+        
+        elif get_response != "":
+            get_BlogObj = Posts.objects.get(id=get_response, blogger=request.user.profile)
+            get_BlogObj.delete()
+        
+            messages.error(request, 'Blog has been deleted successfully!')
+
         return redirect('homepage')
 
-    context = {'posted_blogs': blogs}
+    context = {
+        'edit_blog': edit_blog, 'posted_blogs': blogs, 'total_blogs': Posts.objects.filter(blogger=request.user.profile).count(),
+
+    }
     return render(request, 'users/index.html', context)
 
+
+@login_required(login_url='login')
+@user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False)
 def blogging_view(request):
     blog_form = UploadBlogForm()
 
