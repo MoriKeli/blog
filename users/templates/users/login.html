@@ -16,7 +16,7 @@
                     {% csrf_token %}
                     <fieldset class="form-group">
                         <legend class="border-bottom mb-4 text-center">Login</legend>
-                        {{form|crispy}}
+                        {% include 'messages.html' %}{{form|crispy}}
                     </fieldset>
                     <div class="form-group d-grid gap-2">
                         <button type="submit" class="btn btn-primary mt-2 mb-1">Login</button>
