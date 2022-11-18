@@ -95,15 +95,15 @@ def blogging_view(request):
 def editblogs_view(request, pk, name):
     obj = Posts.objects.get(id=pk)
     edit_blog = EditBlogsForm(instance=obj)
-    
+
     if request.method == 'POST':
-        edit_blog = EditBlogsForm(instance=obj)
+        edit_blog = EditBlogsForm(request.POST, instance=obj)
 
         if edit_blog.is_valid():
             form = edit_blog.save(commit=False)
             form.save()
-            messages.info(request, f'You have edited blog {form.title}')
-            return redirect('edit_blog')
+            messages.warning(request, f'You have edited blog "{form.title}"')
+            return redirect('edit_blog', pk, name)
 
 
     context = {'edit_blog': edit_blog,}
