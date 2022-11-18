@@ -24,7 +24,7 @@
                         {% csrf_token %}
                         <fieldset class="form-group">
                             <legend class="border-bottom mb-4">Profile Info.</legend>
-                            {% if request.user.gender == "" and request.user.phone_no == "" and request.user.country == "" %}
+                            {% if request.user.profile.gender == "" and request.user.profile.phone_no == "" and request.user.profile.country == "" %}
                             {{update_profile|crispy}}
                             {% else %}
                             {{edit_profile|crispy}}
