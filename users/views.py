@@ -35,11 +35,11 @@ def userprofile_view(request):
         edit_form = EditProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if update_form.is_valid():
             update_form.save()
-            messages.success(request, 'Profile picture updated successfully!')
+            messages.success(request, 'Profile edited successfully!')
             
         elif edit_form.is_valid():
             edit_form.save()
-            messages.success(request, 'Profile edited successfully!')
+            messages.info(request, 'Profile picture updated successfully!')
         
         return redirect('profile')
 
