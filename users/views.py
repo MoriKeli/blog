@@ -92,11 +92,11 @@ def blogging_view(request):
 
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False)
-def editblogs_view(request):
-    edit_blog = EditBlogsForm(instance=request.user.profile)
+def editblogs_view(request, pk, name):
+    edit_blog = EditBlogsForm(instance=pk)
     
     if request.method == 'POST':
-        edit_blog = EditBlogsForm(instance=request.user.profile)
+        edit_blog = EditBlogsForm(instance=pk)
 
         if edit_blog.is_valid():
             form = edit_blog.save()
