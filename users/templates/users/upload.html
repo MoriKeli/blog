@@ -1,0 +1,32 @@
+{% extends 'users/base.html' %}{% block title %}Upload blog{% endblock %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% block content %}
+    <div class="container body-container">
+        <div class="row">
+            <div class="col-md-6 offset-sm-3">
+                <div class="card card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4 text-center">Upload Blog</legend>
+                            {{post_blog|crispy}}
+                        </fieldset>
+                        <div class="form-group mt-2">
+                            <button type="submit" class="btn btn-outline-primary">Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

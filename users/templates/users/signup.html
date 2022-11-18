@@ -1,0 +1,34 @@
+{% extends 'users/base.html' %}{% block title %}Signup{% endblock %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% block content %}
+    <div class="container body-container">
+        <div class="row">
+            <div class="col-md-6 offset-sm-3">
+                <form action="" method="post" class="card card-body">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4 text-center">Sign up form</legend>
+                        {{signup_form|crispy}}
+                    </fieldset>
+                    <div class="form-group d-grid gap-2">
+                        <button type="submit" class="btn btn-outline-success mt-3 mb-1">Create account</button>
+                    </div>
+                    <div class="form-group">
+                        <hr>
+                        <p class=" mb-0 text-center">Already have an account? Click here to <b><a href="{% url 'login' %}">Login</a></b></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

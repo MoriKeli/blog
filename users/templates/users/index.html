@@ -1,0 +1,81 @@
+{% extends 'users/base.html' %}{% block title %}Homepage{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% block content %}
+    <main class="container body-container" role="main">
+        {% for blogs in posted_blogs %}
+        <div class="modal fade" id="delete-post-{{blogs.id}}" tabindex="-1">
+            <div class="modal-dialog modal-dialog-start">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete Blog</h5>
+                        <button type="button" class="btn-sm btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <fieldset class="form-group text-center">
+                                <h5 class="text-muted">Are you sure you want to delete <b>"{{blogs.title}}"</b>?</h5>
+                                <div class="form-group text-center mt-4">
+                                    <input type="hidden" name="response" value="{{blogs.id}}">
+                                    <button type="submit" class="btn btn-outline-danger">Delete <i class="bi-trash-fill"></i></button>
+                                   
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row">
+            <div class="col-md-6 offset-sm-2">
+                {% for blogs in posted_blogs %}
+                <div class="card card-body pb-0">
+                    <article class="media content-section">
+                        <div class="d-flex align-items-start justify-content-center">
+                            <img src="{{ blogs.blogger.dp.url }}" alt="img" class="rounded-circle article-img">
+                            <div class="media-body">
+                                <div class="article-metadata">
+                                    <a href="" class="mr-3">{{ blogs.blogger }}</a>
+                                    <small class="text-muted">{{ blogs.posted|date:"F d Y" }}</small>
+                                    <hr class="mt-0">
+                                </div>
+                                <div class="delete-icon">
+                                    <a href="" class="icon" data-bs-toggle="modal" data-bs-target="#delete-post-{{blogs.id}}">
+                                        {% if blogs.blogger == request.user.profile %}<i class="bi bi-trash-fill" style="color: #df3435"></i>{% endif %}
+                                    </a>
+                                </div>
+                                <h4>{{ blogs.title }}</h4>
+                                <p class="article-content">
+                                    {{ blogs.content }}
+                                </p>
+                            </div>
+                        </div>
+                        
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-4">
+                <div class="content-section card-body">
+                    <h4>Your sidebar</h4>
+                    <p class="text-muted">Additional info.</p>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-light">21 Blogs</li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% endblock %}
+</body>
+</html>
+
