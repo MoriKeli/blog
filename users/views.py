@@ -93,15 +93,17 @@ def blogging_view(request):
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False)
 def editblogs_view(request, pk, name):
-    edit_blog = EditBlogsForm(instance=pk)
+    obj = Posts.objects.get(id=pk)
+    edit_blog = EditBlogsForm(instance=obj)
     
     if request.method == 'POST':
-        edit_blog = EditBlogsForm(instance=pk)
+        edit_blog = EditBlogsForm(instance=obj)
 
         if edit_blog.is_valid():
-            form = edit_blog.save()
+            form = edit_blog.save(commit=False)
+            form.save()
             messages.info(request, f'You have edited blog {form.title}')
-            return redirect('')
+            return redirect('edit_blog')
 
 
     context = {'edit_blog': edit_blog,}
