@@ -52,26 +52,19 @@ def userprofile_view(request):
 @user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False)
 def homepage_view(request):
     blogs = Posts.objects.all()
-    edit_blog = EditBlogsForm(instance=request.user.profile)
 
     if request.method == 'POST':
         get_response = request.POST['response']
-        edit_blog = EditBlogsForm(request.POST, instance=request.user.profile)
         
-        if edit_blog.is_valid():
-            form = edit_blog.save()
-            messages.info(request, f'You have edited blog {form.title}')
+        get_BlogObj = Posts.objects.get(id=get_response, blogger=request.user.profile)
+        get_BlogObj.delete()
         
-        elif get_response != "":
-            get_BlogObj = Posts.objects.get(id=get_response, blogger=request.user.profile)
-            get_BlogObj.delete()
-        
-            messages.error(request, 'Blog has been deleted successfully!')
+        messages.error(request, 'Blog has been deleted successfully!')
 
         return redirect('homepage')
 
     context = {
-        'edit_blog': edit_blog, 'posted_blogs': blogs, 'total_blogs': Posts.objects.filter(blogger=request.user.profile).count(),
+        'posted_blogs': blogs, 'total_blogs': Posts.objects.filter(blogger=request.user.profile).count(),
 
     }
     return render(request, 'users/index.html', context)
@@ -95,6 +88,24 @@ def blogging_view(request):
 
     context = {'post_blog': blog_form}
     return render(request, 'users/upload.html', context)
+
+
+@login_required(login_url='login')
+@user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False)
+def editblogs_view(request):
+    edit_blog = EditBlogsForm(instance=request.user.profile)
+    
+    if request.method == 'POST':
+        edit_blog = EditBlogsForm(instance=request.user.profile)
+
+        if edit_blog.is_valid():
+            form = edit_blog.save()
+            messages.info(request, f'You have edited blog {form.title}')
+            return redirect('')
+
+
+    context = {'edit_blog': edit_blog,}
+    return render(request, 'users/edit.html', context)
 
 
 class LogoutUser(LogoutView):
