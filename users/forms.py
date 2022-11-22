@@ -20,12 +20,13 @@ class UpdateProfileForm(forms.ModelForm):
         ('Female', 'Female'),
     )
     gender = forms.ChoiceField(widget=forms.Select(attrs={'type': 'select', 'class': 'mb-2'}), choices=CHOICE_GENDER)
+    dob = forms.DateTimeField(widget=forms.DateInput(attrs={'type': 'date', 'class': 'mb-2'}))
     phone_no = forms.CharField(widget=forms.TextInput(attrs={'type': 'tel', 'class': 'mb-2'}))
     country = forms.CharField(widget=forms.TextInput(attrs={'type': 'text',  'class': 'mb-2'}))
 
     class Meta:
         model = Profile
-        fields = ['gender', 'phone_no', 'country', 'dp']
+        fields = ['gender', 'dob', 'phone_no', 'country', 'dp']
 
 
 class EditProfileForm(forms.ModelForm):
