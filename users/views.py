@@ -112,9 +112,9 @@ def editblogs_view(request, pk, name):
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False)
 def viewuserprofile_view(request, user_name):
-    obj = Profile.objects.get(name=user_name)
+    obj = Profile.objects.get(name__username=user_name)
 
-    
+
 
     context = {}
     return render(request, 'users/view_profile.html', context)
