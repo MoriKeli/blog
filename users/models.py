@@ -47,3 +47,18 @@ class Posts(models.Model):
         ordering = ['-posted']
         verbose_name_plural = 'Posts'
 
+
+class Comments(models.Model):
+    id = models.CharField(max_length=12, primary_key=True, editable=False)
+    post = models.ForeignKey(Posts, on_delete=models.CASCADE, editable=False)
+    name = models.ForeignKey(Profile, on_delete=models.CASCADE, editable=False)
+    comment = models.TextField(blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+    edited = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.post}'
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name_plural = 'Comments'
