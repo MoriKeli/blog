@@ -8,8 +8,12 @@ html, body {
     background-color: #08436d;
 }
 .site-header .container .navbar-brand {
-    margin-left: 20%;
+    margin-left: 12%;
     margin-right: 3%;
+}
+.site-header .container .navbar-brand img {
+    height: 25px;
+    width: 25px;
 }
 .site-header .container .navbar-nav a {
     margin-right: 7px;
