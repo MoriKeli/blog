@@ -45,7 +45,7 @@
                             <img src="{{ blogs.blogger.dp.url }}" alt="img" class="rounded-circle article-img">
                             <div class="media-body">
                                 <div class="article-metadata">
-                                    <a href="" class="mr-3">{{ blogs.blogger }}</a>
+                                    <a href="{% url 'userprofile' blogs.blogger %}" class="mr-3">{{ blogs.blogger }}</a>
                                     <small class="text-muted">{{ blogs.posted|date:"F d Y" }}</small>
                                     <hr class="mt-0">
                                 </div>

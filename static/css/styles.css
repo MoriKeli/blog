@@ -72,3 +72,11 @@ html, body {
     width: 120px;
     margin-right: 3.5%;
 }
+.content-section fieldset .row {
+	margin-bottom: 20px;
+	font-size: 15px;
+}
+.content-section fieldset .label {
+	font-weight: 600;
+	color: rgba(1, 41, 112, 0.6);
+}

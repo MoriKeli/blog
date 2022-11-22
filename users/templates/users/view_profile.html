@@ -1,0 +1,57 @@
+{% extends 'users/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% block content %}
+    <div class="container body-container">
+        <div class="row">
+            <div class="col-md-6 offset-sm-3">
+                <div class="content-section">
+                    <div class="media mb-3 d-flex align-items-center justify-content-center">
+                        <img src="{{obj.profile.dp.url}}" alt="profile-img" class="rounded-circle profile-pic">
+                        <div class="media-body">
+                            <h2 class="username">{{ obj.first_name|title }} {{ obj.last_name|title }}</h2>
+                            <p class="text-secondary">{{ obj.email }}</p>
+                        </div>
+                    </div>
+                    <div class="card card-body">
+                        <fieldset>
+                            <legend class="border-bottom mb-4">Profile Info.</legend>                                
+                            <div class="row">
+								<div class="col-lg-3 col-md-4 label">Username</div>
+								<div class="col-lg-9 col-md-8">{{obj}}</div>
+							</div>
+                            <div class="row">
+								<div class="col-lg-3 col-md-4 label">Gender</div>
+								<div class="col-lg-9 col-md-8">{{obj.profile.gender|default:" -- "}}</div>
+							</div>
+                            <div class="row">
+								<div class="col-lg-3 col-md-4 label">Dob</div>
+								<div class="col-lg-9 col-md-8">{{obj.profile.dob|default:" -- "}}</div>
+							</div>
+                            <div class="row">
+								<div class="col-lg-3 col-md-4 label">Age</div>
+								<div class="col-lg-9 col-md-8">{{obj.profile.age|default:" -- "}}</div>
+							</div>
+                            <div class="row">
+								<div class="col-lg-3 col-md-4 label">Country</div>
+								<div class="col-lg-9 col-md-8">{{obj.profile.country|default:" -- "}}</div>
+							</div>
+                            <div class="row">
+								<div class="col-lg-3 col-md-4 label">Phone No.</div>
+								<div class="col-lg-9 col-md-8">{{obj.profile.phone_no|default:" -- "}}</div>
+							</div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>
