@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="delete-icon">
                                     <a href="{% url 'edit_blog' blogs.id blogs.blogger %}" class="icon">
-                                        {% if blogs.blogger == request.user.profile %}<i class="bi bi-pencil-fill" style="color: #df3435"></i>{% endif %}
+                                        {% if blogs.blogger == request.user.profile %}<i class="bi bi-pencil-fill" style="color: #2b2103"></i>{% endif %}
                                     </a>
                                     <a href="" class="icon" data-bs-toggle="modal" data-bs-target="#delete-post-{{blogs.id}}">
                                         {% if blogs.blogger == request.user.profile %}<i class="bi bi-trash-fill" style="color: #df3435"></i>{% endif %}
