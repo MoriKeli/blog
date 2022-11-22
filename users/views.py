@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView, LogoutView
 from .forms import SignupForm, EditProfileForm, UpdateProfileForm, UploadBlogForm, EditBlogsForm
-from .models import Posts
+from .models import Posts, Profile
 
 
 class UserLogin(LoginView):
@@ -108,6 +108,16 @@ def editblogs_view(request, pk, name):
 
     context = {'edit_blog': edit_blog,}
     return render(request, 'users/edit.html', context)
+
+@login_required(login_url='login')
+@user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False)
+def viewuserprofile_view(request, user_name):
+    obj = Profile.objects.get(name=user_name)
+
+    
+
+    context = {}
+    return render(request, 'users/view_profile.html', context)
 
 
 class LogoutUser(LogoutView):
