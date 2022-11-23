@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView, LogoutView
-from .forms import SignupForm, EditProfileForm, UpdateProfileForm, UploadBlogForm, EditBlogsForm
 from django.contrib.auth.models import User
-from .models import Posts, Profile
+from .forms import SignupForm, EditProfileForm, UpdateProfileForm, UploadBlogForm, EditBlogsForm
+from .models import Posts, Profile, Comments
 
 
 class UserLogin(LoginView):
@@ -55,18 +55,32 @@ def homepage_view(request):
     blogs = Posts.objects.all()
 
     if request.method == 'POST':
-        get_response = request.POST['response']
+        get_response = request.POST.get('response')
+        get_commentObj = request.POST.get('comment')
+        get_postId = request.POST.get('posted_blog_id')
+
+        try:
+            blog_obj = Posts.objects.get(id=get_postId)
+            if get_commentObj != "":
+                new_comment = Comments.objects.create(post=blog_obj, comment=get_commentObj, name=request.user.profile)
+                new_comment.save()
+
+
+            get_BlogObj = Posts.objects.get(id=get_response, blogger=request.user.profile)
+            get_BlogObj.delete()
+            messages.error(request, 'Blog has been deleted successfully!')
         
-        get_BlogObj = Posts.objects.get(id=get_response, blogger=request.user.profile)
-        get_BlogObj.delete()
+        except Posts.DoesNotExist:
+            return redirect('homepage')
         
-        messages.error(request, 'Blog has been deleted successfully!')
 
         return redirect('homepage')
 
+
     context = {
         'posted_blogs': blogs, 'total_blogs': Posts.objects.filter(blogger=request.user.profile).count(),
-
+        'comments': Comments.objects.all(),
+    
     }
     return render(request, 'users/index.html', context)
 
