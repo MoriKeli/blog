@@ -24,8 +24,8 @@
                         <a href="{% url 'profile' %}" class="nav-item nav-link"><i class="bi-person-circle"></i> Profile</a>
                         <a href="{% url 'user_logout' %}" class="nav-item nav-link"><i class="bi-door-open-fill"></i> Logout</a>
                         {% else %}
-                        <a href="{% url 'login' %}" class="nav-item nav-link"><i class="bi-"></i> Login</a>
-                        <a href="{% url 'signup' %}" class="nav-item nav-link"><i class="bi-"></i> Register</a>
+                        <a href="{% url 'login' %}" class="nav-item nav-link"><i class="bi-door-closed-fill"></i> Login</a>
+                        <a href="{% url 'signup' %}" class="nav-item nav-link"><i class="bi-person-plus-fill"></i> Register</a>
                         {% endif %}
                     </div>
                 </div>
