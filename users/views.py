@@ -80,7 +80,6 @@ def homepage_view(request):
                 new_comment = Comments.objects.create(post=blog_obj, comment=get_commentObj, name=request.user.profile)
                 new_comment.save()
 
-
             get_BlogObj = Posts.objects.get(id=get_response, blogger=request.user.profile)
             get_BlogObj.delete()
             messages.error(request, 'Blog has been deleted successfully!')
