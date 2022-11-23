@@ -63,19 +63,25 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="d-flex align-items-start justify-content-center comments-section">
-                            <p><strong>{{ post.user }}</strong> {{ post.caption }}</p>
-                            <img class="rounded-circle" src="{{ blogs.blogger.dp.url }}" alt="img">
-                            <p class="small text-muted">
-                                <b class="fw-bold fst-italic"><a href="{% url 'userprofile' blogs.blogger %}">@{{blogs.blogger}}</a></b><br> {{blogs.content}} <br><b class="text-end">- 2mins ago</b>
-                            </p>
+                        <div class="d-flex align-items-start  comments-section">
+                            {% for c in comments %}
+                                {% if c.post.id == blogs.id %}
+                                    <img class="rounded-circle" src="{{ c.name.dp.url }}" alt="img">
+                                    <p class="small text-muted">
+                                        <b class="fw-bold fst-italic">
+                                            <a href="{% url 'userprofile' blogs.blogger %}">@{{c.name}}</a>
+                                        </b>
+                                        <br>{{c.comment}}<br><b class="text-end">{{c.created|timesince}} ago</b><br>
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                         <hr class="w-100">
                             <div class="d-flex align-items-center post-comment-container">
                                 <a href=""><i class="bi-emoji-smile"></i></a>
                                 <form action="" method="post" class="d-flex">
                                     {% csrf_token %}
-                                    <input type="hidden" name="posted_id" value="{{ post.id }}">
+                                    <input type="hidden" name="posted_blog_id" value="{{ blogs.id }}">
                                     <input type="text" placeholder="Add a comment..." name="comment" class="form-control">
                                     <button type="submit" class="btn btn-default text-primary">Post</button>
                                 </form>
