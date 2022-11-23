@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .forms import SignupForm, EditProfileForm, UpdateProfileForm, UploadBlogForm, EditBlogsForm
 from .models import Posts, Profile, Comments
 
@@ -54,6 +55,20 @@ def userprofile_view(request):
 def homepage_view(request):
     blogs = Posts.objects.all()
 
+    p = Paginator(blogs, 2) 
+    page_number = request.GET.get('page')
+
+    try:
+        page_obj = p.get_page(page_number)
+
+    except PageNotAnInteger:
+        # if page_number is not an integer then assign the first page
+        page_obj = p.page(1)
+    except EmptyPage:
+        # if page is empty then return last page
+        page_obj = p.page(p.num_pages)
+    
+
     if request.method == 'POST':
         get_response = request.POST.get('response')
         get_commentObj = request.POST.get('comment')
@@ -76,11 +91,12 @@ def homepage_view(request):
 
         return redirect('homepage')
 
-
     context = {
-        'posted_blogs': blogs, 'total_blogs': Posts.objects.filter(blogger=request.user.profile).count(),
+        'total_blogs': Posts.objects.filter(blogger=request.user.profile).count(),
         'comments': Comments.objects.all(),
-    
+
+        # pagination
+        'page': page_obj, 'posted_blogs': page_obj        
     }
     return render(request, 'users/index.html', context)
 
