@@ -26,7 +26,6 @@
                                 <div class="form-group text-center mt-4">
                                     <input type="hidden" name="response" value="{{blogs.id}}">
                                     <button type="submit" class="btn btn-outline-danger">Delete <i class="bi-trash-fill"></i></button>
-                                   
                                 </div>
                             </fieldset>
                         </form>
@@ -77,16 +76,15 @@
                             {% endfor %}
                         </div>
                         <hr class="w-100">
-                            <div class="d-flex align-items-center post-comment-container">
-                                <a href=""><i class="bi-emoji-smile"></i></a>
-                                <form action="" method="post" class="d-flex">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="posted_blog_id" value="{{ blogs.id }}">
-                                    <input type="text" placeholder="Add a comment..." name="comment" class="form-control">
-                                    <button type="submit" class="btn btn-default text-primary">Post</button>
-                                </form>
-                            </div>
-                        
+                        <div class="d-flex align-items-center post-comment-container">
+                            <a href=""><i class="bi-emoji-smile"></i></a>
+                            <form action="" method="post" class="d-flex">
+                                {% csrf_token %}
+                                <input type="hidden" name="posted_blog_id" value="{{ blogs.id }}">
+                                <input type="text" placeholder="Add a comment..." name="comment" class="form-control">
+                                <button type="submit" class="btn btn-default text-primary">Post</button>
+                            </form>
+                        </div>
                     </article>
                 </div>
                 {% empty %}
@@ -98,24 +96,18 @@
                     <ul class="pagination pagination-sm justify-content-center">
                         {% if page.has_previous %}
                             <li class="page-item"><a href="?page=1" class="page-link">First</a></li>
-                            <li class="page-item">
-                                <a href="?page={{ page.previous_page_number }}" class="page-link">&laquo;</a>
-                            </li>
+                            <li class="page-item"><a href="?page={{ page.previous_page_number }}" class="page-link">&laquo;</a></li>
                         {% endif %}
                         {% for num in page.paginator.page_range %}
                             {% if page.number == num %}
-                                <li class="page-item active" aria-current="page">
-                                    <a class="page-link" href="?page={{num}}">{{num}} of {{ page.paginator.num_pages }}</a>
-                                </li>
+                                <li class="page-item active" aria-current="page"><a class="page-link" href="?page={{num}}">{{num}} of {{ page.paginator.num_pages }}</a></li>
                             {% elif num > page.number|add:"-2" and num < page.number|add:"2" %}
                                 <li class="page-item"><a class="page-link" href="?page={{num}}">{{num}}</a></li>
                             {% endif %}
                         {% endfor %}
                         {% if page.has_next %}
                             <li class="page-item"><a href="?page={{ page.next_page_number }}" class="page-link">&raquo;</a></li>
-                            <li class="page-item">
-                                <a href="?page={{ page.paginator.num_pages }}" class="page-link">Last</a>
-                            </li>
+                            <li class="page-item"><a href="?page={{ page.paginator.num_pages }}" class="page-link">Last</a></li>
                         {% endif %}
                     </ul>
                 </nav>

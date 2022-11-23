@@ -62,3 +62,15 @@ class Comments(models.Model):
     class Meta:
         ordering = ['-created']
         verbose_name_plural = 'Comments'
+
+
+class Followers(models.Model):
+    id = models.CharField(max_length=12, primary_key=True, editable=False, unique=True)
+    following = models.ForeignKey(Profile, on_delete=models.CASCADE, editable=False)
+    follower = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    followed = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.following}'
+
+
