@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView, LogoutView
-from .forms import SignupForm, EditProfileForm, UpdateProfileForm, UploadBlogForm, EditBlogsForm
 from django.contrib.auth.models import User
+from .forms import SignupForm, EditProfileForm, UpdateProfileForm, UploadBlogForm, EditBlogsForm
 from .models import Posts, Profile, Comments
 
 
@@ -76,10 +76,11 @@ def homepage_view(request):
 
         return redirect('homepage')
 
+
     context = {
         'posted_blogs': blogs, 'total_blogs': Posts.objects.filter(blogger=request.user.profile).count(),
         'comments': Comments.objects.all(),
-
+    
     }
     return render(request, 'users/index.html', context)
 
