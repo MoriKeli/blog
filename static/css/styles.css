@@ -8,12 +8,15 @@ html, body {
     background-color: #08436d;
 }
 .site-header .container .navbar-brand {
-    margin-left: 20%;
+    margin-left: 12%;
     margin-right: 3%;
+}
+.site-header .container .navbar-brand img {
+    height: 25px;
+    width: 25px;
 }
 .site-header .container .navbar-nav a {
     margin-right: 7px;
-    /* color: #cbd5db; */
     color: #ddd;
 }
 .site-header .container .navbar-nav .nav-link:hover {
@@ -67,7 +70,6 @@ html, body {
 }
 .body-container .card .content-section .comments-section {
     margin-left: 18%;
-
 }
 .body-container .card .content-section .comments-section img {
     height: 25px;
@@ -103,4 +105,47 @@ html, body {
 .content-section fieldset .label {
 	font-weight: 600;
 	color: rgba(1, 41, 112, 0.6);
+}
+
+
+/* mobile responsive */
+@media (max-width:320px) {
+    .body-container {
+        margin-top: 22%;
+    }
+    .content-section .media img {
+        height: 80px;
+        width: 80px;
+        margin-right: 3.5%;
+    }
+    .site-header .container .navbar-brand {
+        margin-left: 10%;
+        margin-right: 3%;
+    }
+    .site-header .container .navbar-nav a {
+        margin-left: 10%;
+        margin-right: 5px;
+        color: #ddd;
+    }
+    .site-header .container .account-links {
+        margin-left: 0;
+    }
+
+    .body-container .post-comment-container {
+        margin-left: 2px;
+        margin-bottom: 0;
+    }
+    .body-container .post-comment-container a {
+        /* visibility: hidden; */
+        font-size: 15px;
+        margin-right: 1%;
+        margin-top: -3%;
+        margin-left: -3%;
+        color: black;
+    }
+    .body-container .post-comment-container input[type="text"] {
+        width: 200px;
+    }
+
+
 }
