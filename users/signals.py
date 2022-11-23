@@ -1,7 +1,7 @@
 from django.db.models.signals import pre_save, post_save
 from django.contrib.auth.models import User
 from django.dispatch import receiver
-from .models import Profile, Posts, Comments
+from .models import Profile, Posts, Comments, Followers
 from datetime import datetime
 import uuid
 
@@ -39,6 +39,11 @@ def generate_BlogId(sender, instance, **kwargs):
 
 @receiver(pre_save, sender=Comments)
 def generate_commentsId(sender, instance, **kwargs):
+    if instance.id == "":
+        instance.id = str(uuid.uuid4()).replace('-', '')[:12]
+
+@receiver(pre_save, sender=Followers)
+def generate_followersID(sender, instance, **kwargs):
     if instance.id == "":
         instance.id = str(uuid.uuid4()).replace('-', '')[:12]
 
