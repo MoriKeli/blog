@@ -67,7 +67,7 @@ class Comments(models.Model):
 class Followers(models.Model):
     id = models.CharField(max_length=12, primary_key=True, editable=False, unique=True)
     following = models.ForeignKey(Profile, on_delete=models.CASCADE, editable=False)
-    follower = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    follower = models.CharField(max_length=30, blank=False)
     followed = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -13,7 +13,7 @@ class ProfilesTable(admin.ModelAdmin):
     list_display = ['name', 'gender', 'country']
     search_fields = ['name', 'country']
 
-@admin.register(Foloowers)
+@admin.register(Followers)
 class FollowersTable(admin.ModelAdmin):
     list_display = ['following', 'follower', 'followed',]
 
