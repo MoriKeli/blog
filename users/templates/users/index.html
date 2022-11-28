@@ -62,16 +62,22 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="d-flex align-items-start  comments-section">
+                        <div class="  comments-section">
                             {% for c in comments %}
                                 {% if c.post.id == blogs.id %}
-                                    <img class="rounded-circle" src="{{ c.name.dp.url }}" alt="img">
-                                    <p class="small text-muted">
-                                        <b class="fw-bold fst-italic">
-                                            <a href="{% url 'userprofile' blogs.blogger %}">@{{c.name}}</a>
-                                        </b>
-                                        <br>{{c.comment}}<br><b class="text-end">{{c.created|timesince}} ago</b><br>
-                                    </p>
+                                <ol class="list-group mb-2">
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                      <div class="">
+                                        <img class="rounded-circle" src="{{c.name.dp.url}}" alt="">
+                                        <a href="{% url 'userprofile' c.name %}">@{{c.name}}</a>
+                                        <div class="fw-bold">
+                                            {{c.comment}}
+                                        </div>
+                                        
+                                      </div>
+                                      <span class="text-muted fw-bold">{{c.created|timesince}} ago</span>
+                                    </li>
+                                </ol>
                                 {% endif %}
                             {% endfor %}
                         </div>
