@@ -45,7 +45,7 @@
                             <div class="media-body">
                                 <div class="article-metadata">
                                     <a href="{% url 'userprofile' blogs.blogger %}" class="mr-3">{{ blogs.blogger }}</a>
-                                    <small class="text-muted">{{ blogs.posted|date:"D dS-M-Y" }}</small>
+                                    <small class="text-muted fw-bold">{{ blogs.posted|timesince|cut:" "|slice:":6" }} ago</small>
                                     <hr class="mt-0">
                                 </div>
                                 <div class="delete-icon">
@@ -62,7 +62,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="  comments-section">
+                        <div class="comments-section">
                             {% for c in comments %}
                                 {% if c.post.id == blogs.id %}
                                 <ol class="list-group mb-2">
@@ -75,7 +75,7 @@
                                         </div>
                                         
                                       </div>
-                                      <span class="text-muted fw-bold">{{c.created|timesince}} ago</span>
+                                      <span class="text-muted fw-bold">{{c.created|timesince|cut:" "|slice:"6"}} ago</span>
                                     </li>
                                 </ol>
                                 {% endif %}
