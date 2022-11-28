@@ -109,7 +109,7 @@ html, body {
 
 
 /* mobile responsive */
-@media (max-width:320px) {
+@media only screen and (max-width:320px) {
     .body-container {
         margin-top: 22%;
     }
@@ -147,5 +147,100 @@ html, body {
         width: 200px;
     }
 
+}
 
+@media only screen and (min-device-width: 321px) and (max-device-width: 420px) {
+    .body-container {
+        margin-top: 22%;
+    }
+    .content-section .media img {
+        height: 80px;
+        width: 80px;
+        margin-right: 3.5%;
+    }
+    .site-header .container .navbar-brand {
+        margin-left: 10%;
+        margin-right: 3%;
+    }
+    .site-header .container .navbar-nav a {
+        margin-left: 10%;
+        margin-right: 5px;
+        color: #ddd;
+    }
+    .site-header .container .account-links {
+        margin-left: 0;
+    }
+    .body-container .post-comment-container {
+        margin-left: 2px;
+        margin-bottom: 0;
+    }
+    .body-container .post-comment-container a {
+        /* visibility: hidden; */
+        font-size: 15px;
+        margin-right: 5%;
+        margin-top: -3%;
+        margin-left: 3%;
+        color: black;
+    }
+    .body-container .post-comment-container input[type="text"] {
+        width: 250px;
+
+    }
+}
+
+@media only screen and (min-device-width: 421px) and (max-device-width: 520px) {
+    .body-container {
+        margin-top: 22%;
+    }
+    .content-section .media img {
+        height: 80px;
+        width: 80px;
+        margin-right: 3.5%;
+    }
+    .site-header .container .navbar-brand {
+        margin-left: 10%;
+        margin-right: 3%;
+    }
+    .site-header .container .navbar-nav a {
+        margin-left: 10%;
+        margin-right: 5px;
+        color: #ddd;
+    }
+    .site-header .container .account-links {
+        margin-left: 0;
+    }
+    .body-container .post-comment-container {
+        margin-left: 2px;
+        margin-bottom: 0;
+    }
+    .body-container .post-comment-container a {
+        /* visibility: hidden; */
+        font-size: 15px;
+        margin-right: 5%;
+        margin-top: -3%;
+        margin-left: 3%;
+        color: black;
+    }
+    .body-container .post-comment-container input[type="text"] {
+        width: auto;
+    }
+
+}
+@media only screen and (min-device-width: 440px) and (max-device-width: 459px) {
+    .body-container .post-comment-container input[type="text"] {
+        width: 280px;
+    }
+    
+}
+@media only screen and (min-device-width: 460px) and (max-device-width: 512px) {
+    .body-container .post-comment-container input[type="text"] {
+        width: 310px;
+    }
+    
+}
+@media only screen and (min-device-width: 513px) and (max-device-width: 520px) {
+    .body-container .post-comment-container input[type="text"] {
+        width: 350px;
+    }
+    
 }
