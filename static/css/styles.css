@@ -244,3 +244,55 @@ html, body {
     }
     
 }
+@media only screen and (min-device-width: 521px) and (max-device-width: 545px) {
+    .body-container {
+        margin-top: 22%;
+    }
+    .content-section .media img {
+        height: 80px;
+        width: 80px;
+        margin-right: 3.5%;
+    }
+    .site-header .container .navbar-brand {
+        margin-left: 10%;
+        margin-right: 3%;
+    }
+    .site-header .container .navbar-nav a {
+        margin-left: 10%;
+        margin-right: 5px;
+        color: #ddd;
+    }
+    .site-header .container .account-links {
+        margin-left: 0;
+    }
+    .body-container .post-comment-container {
+        margin-left: 2px;
+        margin-bottom: 0;
+    }
+    .body-container .post-comment-container a {
+        /* visibility: hidden; */
+        font-size: 15px;
+        margin-right: 5%;
+        margin-top: -3%;
+        margin-left: 3%;
+        color: black;
+    }
+    .body-container .post-comment-container input[type="text"] {
+        width: 370px;
+    }
+    
+}
+@media only screen and (min-device-width: 546px) and (max-device-width: 1200px) {
+    .site-header .container .navbar-brand {
+        margin-left: 10%;
+        margin-right: 3%;
+    }
+    .site-header .container .navbar-nav a {
+        margin-left: 10%;
+        margin-right: 5px;
+        color: #ddd;
+    }
+    .site-header .container .account-links {
+        margin-left: 0;
+    }
+}
