@@ -74,19 +74,20 @@ def homepage_view(request):
         get_commentObj = request.POST.get('comment')
         get_postId = request.POST.get('posted_blog_id')
 
+
+        get_BlogObj = Posts.objects.get(id=get_response, blogger=request.user.profile)
+        get_BlogObj.delete()
+        messages.error(request, 'Blog has been deleted successfully!')
+        
         try:
             blog_obj = Posts.objects.get(id=get_postId)
             if get_commentObj != "":
                 new_comment = Comments.objects.create(post=blog_obj, comment=get_commentObj, name=request.user.profile)
                 new_comment.save()
-
-            get_BlogObj = Posts.objects.get(id=get_response, blogger=request.user.profile)
-            get_BlogObj.delete()
-            messages.error(request, 'Blog has been deleted successfully!')
         
         except Posts.DoesNotExist:
             return redirect('homepage')
-        
+
 
         return redirect('homepage')
 
