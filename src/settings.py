@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-y3tj0*h&%@!$r&53v1ah73k^pt7r+q!&^%cv2g(q7ifxu2i$#j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['brocode254.pythonanywhere.com/']
 
 
 # Application definition
@@ -114,6 +114,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 
 ]
+STATIC_ROOT = ''
 
 MEDIA_URL = 'mediaFiles/'
 MEDIA_ROOT = os.path.join(BASE_DIR/'mediaFiles/')
