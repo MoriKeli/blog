@@ -1,20 +1,24 @@
 from pathlib import Path
+import environ
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+environ.Env.read_env()
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y3tj0*h&%@!$r&53v1ah73k^pt7r+q!&^%cv2g(q7ifxu2i$#j'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
+ALLOWED_HOSTS = [env('DOMAIN')]
 
 
 # Application definition
@@ -36,6 +40,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -114,7 +119,7 @@ STATIC_URL = 'static/'
 #     os.path.join(BASE_DIR, 'static'),
 
 # ]
-STATIC_ROOT = BASE_DIR/'static/'
+STATIC_ROOT = Path.joinpath(BASE_DIR, 'static')
 
 MEDIA_URL = 'mediaFiles/'
 MEDIA_ROOT = os.path.join(BASE_DIR/'mediaFiles/')
